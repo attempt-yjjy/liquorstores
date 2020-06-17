@@ -14,5 +14,13 @@ export default {
 }
 </script>
 <style>
+  ::-webkit-scrollbar{
+    width:5px;
+    height:5px; 
+  }
+
+  ::-webkit-scrollbar-thumb{
+    width:5px;
+  }
 
 </style>
