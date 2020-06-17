@@ -73,6 +73,7 @@
   .login-block:hover{
       background-color: rgba(245,218,219,0.8);
       transition: all 0.3s;
+      box-shadow: 0 0 3px 3px rgba(255, 255, 255, 0.4);
   }
 
   .sub-container{
@@ -86,7 +87,9 @@
   .login-total-container{
       font-weight: 700;
       font-size: x-large;
-      color:rgba(100,100,100,0.8)
+      /* color:rgba(100,100,100,0.8) */
+      color:white;
+      text-shadow: 1px 1px black;
   }
 
   .login-id-container input,.login-password-container input{
@@ -107,13 +110,16 @@
       outline: 1px solid rgba(187,225,234,0.8);
       font-size: 14px;
       cursor: pointer;
-      color:rgba(100,100,100,0.8)
+      /* color:rgba(100,100,100,0.8) */
+      color:white;
+      text-shadow: 1px 1px black;
       
   }
 
   .login-button-container button:hover{
       font-size: 18px;
-      box-shadow: 0 0 3px 3px rgba(189,180,180,0.4);
+      /* box-shadow: 0 0 3px 3px rgba(189,180,180,0.4); */
+      box-shadow: 0 0 3px 3px rgba(255, 255, 255, 0.4);
       letter-spacing: 5px;
       transition: all 0.3s;   
   }
