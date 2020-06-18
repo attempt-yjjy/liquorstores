@@ -20,7 +20,7 @@
           </div>
           <div class="price-container flex-hoz">
               <span>原价:￥{{JuicePrice}}</span>
-              <span>折扣价:￥{{priceWithDiscount}}</span>
+              <span style="color:red">折扣价:￥{{priceWithDiscount}}</span>
           </div>
       </div>
   </div>
