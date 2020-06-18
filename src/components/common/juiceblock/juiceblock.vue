@@ -87,6 +87,7 @@
       box-shadow: 1px 1px 5px 1px rgba(10,10,10,0.6);
       cursor: pointer;
       border-radius: 1%;
+      animation: entrance 0.6s;
   }
 
   .juiceblock-container:hover{
@@ -157,4 +158,14 @@
       align-items: center;
   }
 
+@keyframes entrance{
+    0%{
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100%{
+        opacity: 1;
+        transform: scale(1);
+    }
+}
 </style>
