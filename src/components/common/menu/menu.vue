@@ -78,6 +78,7 @@
       width:100%;
       cursor: pointer;
       box-shadow: 0px 0px 5px 2px rgb(150, 150, 150);
+      animation: menuentrance 0.6s;
   }
 
   .menu-level1-item-container{
@@ -167,6 +168,15 @@
       }
       100%{
           transform: rotateZ(0deg);
+      }
+  }
+
+  @keyframes menuentrance{
+      0%{
+          transform: scaleX(0);
+      }
+      100%{
+          transform: scaleY(1);
       }
   }
 </style>
