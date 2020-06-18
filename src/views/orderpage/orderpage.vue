@@ -5,7 +5,7 @@
       </header>
         <div class="body-container">
             <div class="menu-container">
-              <menu-bar></menu-bar>
+              <menu-bar :showlist="menulist"></menu-bar>
             </div>
             <div class="list-container">
                 
@@ -31,7 +31,8 @@
     name:'OrderPage',
     data(){
         return {
-            juiceList:[]
+            juiceList:[],
+            menulist:[]
         }
     },
     props:{
@@ -43,10 +44,14 @@
         JuiceBlock
     },
     created(){
-        request.get.then(result=>{
+        request.get("/public/juice-list.json").then(result=>{
             this.juiceList = result.data
         }).catch(error=>{
             console.log("发生错误")
+        })
+
+        request.get("/public/menu-list.json").then(result=>{
+            this.menulist = result.data
         })
     }
   }

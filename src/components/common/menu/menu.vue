@@ -30,42 +30,7 @@
     props:{
       showlist:{
           type:Array,
-          required:false,
-          default:()=>{
-              return [
-              {
-                  text:"数据管理",
-                  level2:[
-                      {
-                          text:"学员管理",
-                          routerPath:'/studentmanage'
-                      },
-                      {
-                          text:"学科管理",
-                          routerPath:'/coursemanage'
-                      },
-                      {
-                          text:"报名管理",
-                          routerPath:'/signupmanage' 
-                      }
-                  ]
-              },
-              {
-                  text:"机构管理",
-                  level2:[
-                      {
-                          text:"学员管理"
-                      },
-                      {
-                          text:"学科管理"
-                      },
-                      {
-                          text:"报名管理"
-                      }
-                  ]
-              }
-          ]
-          }
+          required:true
       }
     },
     data(){

@@ -1,3 +1,6 @@
 let instance = require('./base.js')
 
-exports.get = instance.get("/public/juice-list.json")
+exports.get = function(url){
+    return instance.get(url)
+}
+
