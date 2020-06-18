@@ -11,6 +11,10 @@ Vue.use(VueRouter)
   {
     path:'/login',
     component:LoginBlock
+  },
+  {
+    path:'/order',
+    component:()=>import('views/orderpage/orderpage.vue')
   }
 ]
 

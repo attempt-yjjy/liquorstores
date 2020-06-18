@@ -32,7 +32,7 @@
     },
     methods:{
         submit(){
-            
+            this.$router.push('/order')
         }
     },
     created:()=>{
@@ -110,6 +110,7 @@
       outline: 1px solid rgba(187,225,234,0.8);
       font-size: 14px;
       cursor: pointer;
+      font-weight: 500;
       /* color:rgba(100,100,100,0.8) */
       color:white;
       text-shadow: 1px 1px black;

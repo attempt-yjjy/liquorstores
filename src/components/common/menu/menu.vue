@@ -1,0 +1,207 @@
+<template>
+  <div class='menu-container' @mouseleave="mouseLeave">
+    <div class="menu">
+        <div v-for="(item) in showlist" :key="item.text" class="menu-level1-item-container">
+            <div class="menu-level1-item" @click="level1BeClicked(item.text)">
+                <div class="menu-level1-item-logo-container">
+                    <img src="~assets/img/icon/menu/drink.png" />
+                </div>
+                <div class="menu-level1-item-text-container">
+                    <span>{{item.text}}</span>
+                </div>
+                <div class="menu-level1-item-arrows-container">
+                    <img src="~assets/img/icon/menu/arrow.png" :class="{'arrow-rotate':currentText == item.text,'arrow-rotate-reserve':currentText != item.text}"/>
+                </div>
+            </div>
+            <div :class="{'menu-level2-container':true,'appear':currentText == item.text,'disappear':currentText != item.text}">
+                <div class="menu-level2-item" v-for="item2 in item.level2" :key="item2.text" @click="level2_router_jump(item2.routerPath)">
+                    <span>{{item2.text}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</template>
+<script>
+  import {$} from '../../../js/jquery/jq'
+
+  export default {
+    name:'MenuBar',
+    props:{
+      showlist:{
+          type:Array,
+          required:false,
+          default:()=>{
+              return [
+              {
+                  text:"数据管理",
+                  level2:[
+                      {
+                          text:"学员管理",
+                          routerPath:'/studentmanage'
+                      },
+                      {
+                          text:"学科管理",
+                          routerPath:'/coursemanage'
+                      },
+                      {
+                          text:"报名管理",
+                          routerPath:'/signupmanage' 
+                      }
+                  ]
+              },
+              {
+                  text:"机构管理",
+                  level2:[
+                      {
+                          text:"学员管理"
+                      },
+                      {
+                          text:"学科管理"
+                      },
+                      {
+                          text:"报名管理"
+                      }
+                  ]
+              }
+          ]
+          }
+      }
+    },
+    data(){
+        return{
+            currentText:''
+        }
+    },
+    methods:{
+        level1BeClicked(text){
+            if(this.currentText == text){
+                this.currentText = ''
+                setTimeout(()=>{
+                    $('.appear').slideDown(300)
+                    $('.disappear').slideUp(300)
+                })
+                return
+            }
+
+            this.currentText = text
+
+            setTimeout(()=>{
+                $('.appear').slideDown(300)
+                $('.disappear').slideUp(300)
+            })
+        },
+        mouseLeave(){
+            this.currentText = ''
+            setTimeout(()=>{
+                $('.appear').slideDown(300)
+                $('.disappear').slideUp(300)
+            })
+        },
+        level2_router_jump(path){
+            
+        }
+    }
+  }
+</script>
+<style scoped>
+  .menu-container{
+      width:100%;
+  }
+
+  .menu{
+      width:100%;
+      cursor: pointer;
+      box-shadow: 0px 0px 5px 2px rgb(150, 150, 150);
+  }
+
+  .menu-level1-item-container{
+      width:100%;
+  }
+
+  .menu-level1-item{
+      width:100%;
+      display: flex;
+      flex-direction:row;
+      height:50px;
+      background-color: rgb(250,195,194);
+      color:white;
+      font-weight: 400;
+      text-shadow: 1px 1px 5px black;
+  }
+
+  .menu-level1-item-logo-container{
+      width:30px;
+      padding: 10px;
+      
+  }
+
+  .menu-level1-item-logo-container img{
+      width:30px;
+  }
+
+  .menu-level1-item-text-container{
+      flex:1;
+      height:50px;
+      line-height: 50px;
+      text-align: left;
+  }
+
+  .menu-level1-item-arrows-container{
+      width:20px;
+      padding:15px;
+  }
+
+  .menu-level1-item-arrows-container img{
+      width:20px;
+  }
+
+  .menu-level2-container{
+      width:100%;
+      display: none;
+  }
+
+  .menu-level2-item{
+      width:100%;
+      height:50px;
+      background-color: rgb(201,229,222);
+      text-align: center;
+      line-height: 50px;
+      border-bottom: 1px solid white;
+      color:white;
+      font-weight: 500;
+      text-shadow: 1px 1px 5px black;
+  }
+
+  .menu-level2-item:hover{
+      background-color: rgb(201,229,222,0.6);
+  }
+  
+  .arrow-rotate{
+      animation: imgrotate 0.3s;
+      animation-fill-mode: forwards;
+  }
+
+  .arrow-rotate-reserve{
+      animation: imgrotatereserve 0.3s;
+      animation-fill-mode: forwards;
+  }
+
+  @keyframes imgrotate{
+      0%{
+          transform: rotateZ(0deg);
+      }
+      100%{
+          transform: rotateZ(90deg);
+      }
+  }
+
+  @keyframes imgrotatereserve{
+      0%{
+          transform: rotateZ(90deg);
+      }
+      100%{
+          transform: rotateZ(0deg);
+      }
+  }
+</style>
