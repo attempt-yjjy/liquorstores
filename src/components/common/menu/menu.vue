@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div :class="{'menu-level2-container':true,'appear':currentText == item.text,'disappear':currentText != item.text}">
-                <div class="menu-level2-item" v-for="item2 in item.level2" :key="item2.text" @click="level2_router_jump(item2.routerPath)">
+                <div class="menu-level2-item" v-for="item2 in item.level2" :key="item2.text" @click="level2_router_jump(item2.text)">
                     <span>{{item2.text}}</span>
                 </div>
             </div>
@@ -63,8 +63,8 @@
                 $('.disappear').slideUp(300)
             })
         },
-        level2_router_jump(path){
-            
+        level2_router_jump(text){
+            this.$emit("contenttoggle",text)
         }
     }
   }

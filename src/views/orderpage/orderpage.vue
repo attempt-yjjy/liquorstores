@@ -5,16 +5,17 @@
       </header>
         <div class="body-container">
             <div class="menu-container">
-              <menu-bar :showlist="menulist"></menu-bar>
+              <menu-bar :showlist="menulist" @contenttoggle="changecontent"></menu-bar>
             </div>
             <div class="list-container">
                 
-                <div class="list-item" v-for="item in juiceList" :key="item.JuiceId"> 
+                <div class="list-item" v-for="item in juiceListToShow" :key="item.JuiceId"> 
                     <juice-block :juice-src="item.JuiceSrc" 
                                     :juice-name="item.JuiceName" 
                                     :juice-price="item.JuicePrice"
                                     :today-sales="item.TodaySales"
-                                    :discount="item.discount" />
+                                    :discount="item.discount"
+                                     />
                 </div>
             </div>
         </div>
@@ -31,12 +32,22 @@
     name:'OrderPage',
     data(){
         return {
-            juiceList:[],
+            juiceListToShow:[],
+            juiceListAll:[],
             menulist:[]
         }
     },
     props:{
       
+    },
+    methods:{
+        changecontent(text){
+            this.juiceListToShow = this.juiceListAll.filter(value=>{
+                
+                return value.BelongTo == text
+                 
+            })
+        }
     },
     components:{
         TopBar,
@@ -45,7 +56,9 @@
     },
     created(){
         request.get("/public/juice-list.json").then(result=>{
-            this.juiceList = result.data
+            
+            this.juiceListToShow = result.data.map(value=>value)
+            this.juiceListAll = result.data
         }).catch(error=>{
             console.log("发生错误")
         })
