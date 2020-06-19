@@ -3,8 +3,8 @@
       <div class="button-slot-container">
           <slot></slot>
       </div>
-      <div class="profile-container">
-          <div class="name">{{name}}</div>
+      <div class="custom-container">
+          <div class="content" @click="buttonBeClicked">{{content}}</div>
       </div>
   </div>
 </template>
@@ -16,8 +16,13 @@
     },
     data(){
         return {
-            name:'Mr Yuan'
+            content:'Search In All Menu'
         }
+    },
+    methods:{
+      buttonBeClicked(){
+        this.$emit("buttonbecliked")
+      }
     }
   }
 </script>
@@ -35,7 +40,25 @@
       box-sizing: border-box;
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
+      justify-content: flex-end;
       align-items: center;
+  }
+
+  .custom-container .content{
+    height:5vh;
+    width:10vw;
+    background-color: rgb(25, 209, 233);
+    text-align: center;
+    line-height: 5vh;
+    color:azure;
+    border-radius: 2px;
+    cursor: pointer;
+    box-shadow: none;
+    opacity: 0.6;
+  }
+
+  .custom-container .content:hover{
+    opacity: 1;
+    transition: all 0.3s;
   }
 </style>

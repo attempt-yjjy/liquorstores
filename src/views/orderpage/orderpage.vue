@@ -1,14 +1,13 @@
 <template>
   <div class='orderpage-container'>
       <header>
-          <top-bar></top-bar>     
+          <top-bar @buttonbecliked="togglesearch"></top-bar>     
       </header>
         <div class="body-container">
             <div class="menu-container">
               <menu-bar :showlist="menulist" @contenttoggle="changecontent"></menu-bar>
             </div>
-            <div class="list-container">
-                
+            <div class="list-container">               
                 <div class="list-item" v-for="item in juiceListToShow" :key="item.JuiceId"> 
                     <juice-block :juice-src="item.JuiceSrc" 
                                     :juice-name="item.JuiceName" 
@@ -19,14 +18,22 @@
                 </div>
             </div>
         </div>
+        <aside>
+            <div class="searchblock-container">
+                <search-block @startsearch="startsearchfunc"></search-block>
+            </div>
+        </aside>
   </div>
 </template>
 <script>
   let request = require('../../js/request/request.js')
 
+  import {$} from '@/js/jquery/jq.js'
+
   import TopBar from 'components/common/topbar/topbar'
   import MenuBar from 'components/common/menu/menu'
   import JuiceBlock from 'components/common/juiceblock/juiceblock'
+  import SearchBlock from 'components/common/searchblock/searchblock'
 
   export default {
     name:'OrderPage',
@@ -47,12 +54,22 @@
                 return value.BelongTo == text
                  
             })
+        },
+        togglesearch(){
+            $('.searchblock-container').slideToggle(300)
+        },
+        startsearchfunc(text){
+            this.juiceListToShow = this.juiceListAll.filter(value=>{
+                let reg = new RegExp(text)
+                return reg.test(value.JuiceName)
+            })
         }
     },
     components:{
         TopBar,
         MenuBar,
-        JuiceBlock
+        JuiceBlock,
+        SearchBlock
     },
     created(){
         request.get("/public/juice-list.json").then(result=>{
@@ -111,6 +128,15 @@
       height:350px;
       margin:20px;
       
+  }
+
+  .searchblock-container{
+      position: absolute;
+      top:6vh;
+      right:0vw;
+      height:30vh;
+      width:15vw;
+      display: none;
   }
   
 </style>
