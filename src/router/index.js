@@ -16,6 +16,10 @@ Vue.use(VueRouter)
   {
     path:'/order',
     component:()=>import('views/orderpage/orderpage.vue')
+  },
+  {
+    path:'/special',
+    component:()=>import('views/special/special.vue')
   }
 ]
 
