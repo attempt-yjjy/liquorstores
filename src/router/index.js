@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import LoginBlock from '../components/login/loginblock'
+
 Vue.use(VueRouter)
 
   const routes = [
