@@ -4,7 +4,10 @@
           <slot></slot>
       </div>
       <div class="custom-container">
-          <div class="content" @click="buttonBeClicked">{{content}}</div>
+          <div :class="{'content':true,'bgcolor-origin':!alreadyopen,'bgcolor-open':alreadyopen}" @click="buttonBeClicked">
+            <span v-if="!alreadyopen">{{content1}}</span>
+            <span v-else>{{content2}}</span>
+          </div>
       </div>
   </div>
 </template>
@@ -16,12 +19,15 @@
     },
     data(){
         return {
-            content:'Search In All Menu'
+            content1:'Search In All Menu',
+            content2:'Close Search',
+            alreadyopen:false
         }
     },
     methods:{
       buttonBeClicked(){
         this.$emit("buttonbecliked")
+        this.alreadyopen = !(this.alreadyopen)
       }
     }
   }
@@ -47,7 +53,6 @@
   .custom-container .content{
     height:5vh;
     width:10vw;
-    background-color: rgb(25, 209, 233);
     text-align: center;
     line-height: 5vh;
     color:azure;
@@ -60,5 +65,14 @@
   .custom-container .content:hover{
     opacity: 1;
     transition: all 0.3s;
+  }
+
+  .bgcolor-origin{
+    background-color: rgb(25, 209, 233);
+  }
+
+  .bgcolor-open{
+    background-color: rgb(250,195,194);
+    text-shadow: 1px 1px 5px black;
   }
 </style>
