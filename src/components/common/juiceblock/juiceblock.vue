@@ -1,8 +1,7 @@
 <template>
   <div class='juiceblock-container' :style="{'width':BlockWidth,'height':BlockHeight}">
       <div class="juice-img-container">
-          <img src="~assets/img/other/replace-no-img.png" title="无图片" alt="" v-if="JuiceSrc==''"/>
-          <img :src="JuiceSrc" :title="JuiceName" alt="" v-else/>
+          <img :src="'http://www.yjxyjx.club:8077/public/imgbase/' + (JuiceId%30+1) + '.jpg'" :title="JuiceName" alt=""/>
       </div>
       <div class="juice-intruduce-container flex-col">
           <div class="juice-name-container">
@@ -39,11 +38,6 @@
           required:false,
           default:'100%'
       },
-      JuiceSrc:{
-          type:String,
-          required:false,
-          default:''
-      },
       JuiceName:{
           type:String,
           required:false,
@@ -63,6 +57,11 @@
           type:Number,
           required:false,
           default:0
+      },
+      JuiceId:{
+          type:Number,
+          required:false,
+          default:1
       }
     },
     computed:{
@@ -100,11 +99,18 @@
   .juice-img-container{
       width:80%;
       height:40%;
+      border: rgb(250,195,194) 5px solid;
+      background-color: white;
   }
 
   .juice-img-container img{
-      width:100%;
+      width:70%;
       height:100%;
+      display: block;
+      margin: auto;
+      border-radius: 6px;
+      border: rgb(250,195,194) 5px solid;
+      border-bottom: rgb(250,195,194) 7px solid;
   }
 
   .juice-intruduce-container{

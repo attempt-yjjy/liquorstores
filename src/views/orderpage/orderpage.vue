@@ -9,7 +9,7 @@
             </div>
             <div class="list-container">               
                 <div class="list-item" v-for="item in juiceListToShow" :key="item.JuiceId"> 
-                    <juice-block :juice-src="item.JuiceSrc" 
+                    <juice-block    :juice-id="item.JuiceId"
                                     :juice-name="item.JuiceName" 
                                     :juice-price="item.JuicePrice"
                                     :today-sales="item.TodaySales"
