@@ -48,9 +48,25 @@ export default{
             }
         ],
         currentOrderId:-1,
-        currentJuice:{}
+        currentJuice:{
+            JuiceId:0,
+            JuiceName:'',
+            JuicePrice:0,
+            TodaySales:'',
+            discount:1,
+            count:0
+        }
     },
     mutations:{
+        chooseJuice(state,juice){
+            let count = 1
+            let tempobject = {}
+            for(let key in juice){
+                tempobject[key] = juice[key]
+            }
+            tempobject.count = count
+            state.currentJuice = tempobject
+        },
         addJuice(state,juice){
             let id = juice.JuiceId
             let exists = false

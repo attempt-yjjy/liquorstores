@@ -22,12 +22,8 @@
             <div class="searchblock-container">
                 <search-block @startsearch="startsearchfunc"></search-block>
             </div>
-            <div class="dialog-container">
-                <dialog-block  :juice-id="$store.state.order.currentJuice.JuiceId"
-                        :juice-name="$store.state.order.currentJuice.JuiceName" 
-                        :juice-price="$store.state.order.currentJuice.JuicePrice"
-                        :discount="$store.state.order.currentJuice.discount" 
-                        @besure="besure" v-if="false"></dialog-block>
+            <div class="dialog-container"  v-show="dialogFormVisible">
+                <dialog-block  @besure="besure" @dialogoff="dialogoff"></dialog-block>
             </div>
             <div v-show="SummaryBlockVisible">
                 <summary-block @block-off="summaryoff"></summary-block>
@@ -85,9 +81,14 @@
         },
         besure(count){
             //在这把id和数量发给浮窗组件
+            this.dialogFormVisible = false
+        },
+        dialogoff(){
+            this.dialogFormVisible = false
         },
         chooseJuice(item){
-            this.$store.state.order.currentJuice = item
+            this.$store.commit('chooseJuice',item)
+            this.dialogFormVisible = true
         },
         summaryoff(){
             this.SummaryBlockVisible = false
