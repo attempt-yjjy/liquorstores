@@ -3,20 +3,16 @@
     
     <global-bg></global-bg>
     <router-view></router-view>
-    <float-promp></float-promp>
-    <summary-block></summary-block>
+ 
   </div>
 </template>
 <script>
-import FloatPromp from 'components/common/floatpromp/floatpromp'
+
 import GlobalBg from './components/global/globalbg'
-import SummaryBlock from 'components/common/summaryblock/summaryblock'
 
 export default {
   components:{
-    GlobalBg,
-    FloatPromp,
-    SummaryBlock
+    GlobalBg
   }
 }
 </script>

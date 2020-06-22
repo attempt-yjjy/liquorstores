@@ -1,7 +1,7 @@
 <template>
   <div class='juiceblock-container' :style="{'width':BlockWidth,'height':BlockHeight}">
       <div class="juice-img-container">
-          <img :src="'http://www.yjxyjx.club/public/imgbase/' + (JuiceId%30+1) + '.jpg'" :title="JuiceName" alt=""/>
+          <img :src="$store.state.order.imgbaseUrl + (JuiceId%30+1) + '.jpg'" :title="JuiceName" alt=""/>
       </div>
       <div class="juice-intruduce-container flex-col">
           <div class="juice-name-container">

@@ -8,7 +8,7 @@
               <menu-bar :showlist="menulist" @contenttoggle="changecontent"></menu-bar>
             </div>
             <div class="list-container">               
-                <div class="list-item"  v-for="item in juiceListToShow" :key="item.JuiceId" @click="dialogFormVisible = true"> 
+                <div class="list-item"  v-for="item in juiceListToShow" :key="item.JuiceId" @click="chooseJuice(item)"> 
                     <juice-block    :juice-id="item.JuiceId"
                                     :juice-name="item.JuiceName" 
                                     :juice-price="item.JuicePrice"
@@ -23,11 +23,17 @@
                 <search-block @startsearch="startsearchfunc"></search-block>
             </div>
             <div class="dialog-container">
-                <dialog-block  :juice-id="currentJuice.JuiceId"
-                        :juice-name="currentJuice.JuiceName" 
-                        :juice-price="currentJuice.JuicePrice"
-                        :discount="currentJuice.discount" 
-                        @besure="besure"></dialog-block>
+                <dialog-block  :juice-id="$store.state.order.currentJuice.JuiceId"
+                        :juice-name="$store.state.order.currentJuice.JuiceName" 
+                        :juice-price="$store.state.order.currentJuice.JuicePrice"
+                        :discount="$store.state.order.currentJuice.discount" 
+                        @besure="besure" v-if="false"></dialog-block>
+            </div>
+            <div v-show="SummaryBlockVisible">
+                <summary-block @block-off="summaryoff"></summary-block>
+            </div>
+            <div @click="SummaryBlockVisible = true">
+                <float-promp></float-promp>
             </div>
         </aside>
   </div>
@@ -42,6 +48,8 @@
   import JuiceBlock from 'components/common/juiceblock/juiceblock'
   import SearchBlock from 'components/common/searchblock/searchblock'
   import DialogBlock from 'components/common/dialog/dialog'
+  import SummaryBlock from 'components/common/summaryblock/summaryblock'
+  import FloatPromp from 'components/common/floatpromp/floatpromp'
 
   export default {
     name:'OrderPage',
@@ -51,12 +59,8 @@
             juiceListAll:[],
             menulist:[],
             dialogFormVisible:false,
-            currentJuice:{
-                JuiceId:0,
-                JuiceName:'',
-                JuicePrice:0,
-                discount:1
-            }
+            currentJuice:{},
+            SummaryBlockVisible:false
         }
     },
     props:{
@@ -81,6 +85,12 @@
         },
         besure(count){
             //在这把id和数量发给浮窗组件
+        },
+        chooseJuice(item){
+            this.$store.state.order.currentJuice = item
+        },
+        summaryoff(){
+            this.SummaryBlockVisible = false
         }
     },
     components:{
@@ -88,7 +98,9 @@
         MenuBar,
         JuiceBlock,
         SearchBlock,
-        DialogBlock
+        DialogBlock,
+        SummaryBlock,
+        FloatPromp
     },
     created(){
         request.get("/public/juice-list.json").then(result=>{
