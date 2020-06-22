@@ -11,10 +11,10 @@
                 <div class="dialog-txt" label="原价" :label-width="formLabelWidth">
                     <div class="dialog-frame" prop="currentJuice.JuicePrice" autocomplete="off"></div>
                 </div>
-                <el-form-item label="数量" :label-width="formLabelWidth">
-                    <el-input v-model="currentJuice.count" placeholder="请输入数量">
-                    </el-input>
-                </el-form-item>
+                <div class="dialog-item" label="数量" :label-width="formLabelWidth">
+                    <div class="dialog-input" prop="currentJuice.count" placeholder="请输入数量">
+                    </div>
+                </div>
             </div>
             <div slot="footer" class="dialog-footer">
                 <div class="dialog-button-focus" @click="dialogFormVisible = false">取 消</div>
@@ -80,7 +80,7 @@ export default {
         left:0;
         width:100vw;
         height:100vh;
-        background: rgba(100,100,100,0.4);
+        background: rgba(100,100,100,0.5);
         z-index:120;
         display:flex;
         flex-direction: row;
@@ -99,12 +99,37 @@ export default {
         word-break: break-all;
     }
     .dialog-txt{
-
+        text-align: right;
+        vertical-align: middle;
+        /*float: left;*/
+        font-size: 14px;
+        color: #606266;
+        line-height: 40px;
+        padding: 0 12px 0 0;
+        box-sizing: border-box;
     }
     .dialog-frame{
-
+        -webkit-appearance: none;
+        background-color: #fff;
+        background-image: none;
+        border-radius: 4px;
+        border: 1px solid #dcdfe6;
+        box-sizing: border-box;
+        color: #606266;
+        display: inline-block;
+        font-size: inherit;
+        height: 40px;
+        line-height: 40px;
+        outline: none;
+        padding: 0 15px;
+        transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+        width: 100%;
     }
+
     .dialog-footer{
+        padding: 10px 20px 20px;
+        text-align: right;
+        box-sizing: border-box;
 
     }
     .dialog-button-focus.dialog-button-primary{ 
@@ -128,16 +153,47 @@ export default {
         padding: 12px 20px;
         font-size: 14px;
         border-radius: 4px;
+        
     }
     .dialog-button-focus{
-
+        font-family: inherit;
+        font-size: inherit;
+        line-height: inherit;
+        color: inherit;
+        float: left;
     }
+
+    
     .dialog-button-primary{
         color: #fff;
         background-color: #409eff;
         border-color: #409eff;
+        float: left;
     } 
 
+    .dialog-item{
+        padding: 30px 20px;
+        color: #606266;
+        font-size: 14px;
+        word-break: break-all;
+    }
 
+    .dialog-input{
+        -webkit-appearance: none;
+        background-color: #fff;
+        background-image: none;
+        border-radius: 4px;
+        border: 1px solid #dcdfe6;
+        box-sizing: border-box;
+        color: #606266;
+        display: inline-block;
+        font-size: inherit;
+        height: 40px;
+        line-height: 40px;
+        outline: none;
+        padding: 0 15px;
+        transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+        width: 100%;
+    }
 
 </style>
