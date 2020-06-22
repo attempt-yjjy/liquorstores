@@ -8,7 +8,7 @@
               <menu-bar :showlist="menulist" @contenttoggle="changecontent"></menu-bar>
             </div>
             <div class="list-container">               
-                <div class="list-item" v-for="item in juiceListToShow" :key="item.JuiceId"> 
+                <div class="list-item"  v-for="item in juiceListToShow" :key="item.JuiceId" @click="dialogFormVisible = true"> 
                     <juice-block    :juice-id="item.JuiceId"
                                     :juice-name="item.JuiceName" 
                                     :juice-price="item.JuicePrice"
@@ -22,6 +22,13 @@
             <div class="searchblock-container">
                 <search-block @startsearch="startsearchfunc"></search-block>
             </div>
+            <div class="dialog-container">
+                <dialog-block  :juice-id="currentJuice.JuiceId"
+                        :juice-name="currentJuice.JuiceName" 
+                        :juice-price="currentJuice.JuicePrice"
+                        :discount="currentJuice.discount" 
+                        @besure="besure"></dialog-block>
+            </div>
         </aside>
   </div>
 </template>
@@ -34,6 +41,7 @@
   import MenuBar from 'components/common/menu/menu'
   import JuiceBlock from 'components/common/juiceblock/juiceblock'
   import SearchBlock from 'components/common/searchblock/searchblock'
+  import DialogBlock from 'components/common/dialog/dialog'
 
   export default {
     name:'OrderPage',
@@ -41,7 +49,14 @@
         return {
             juiceListToShow:[],
             juiceListAll:[],
-            menulist:[]
+            menulist:[],
+            dialogFormVisible:false,
+            currentJuice:{
+                JuiceId:0,
+                JuiceName:'',
+                JuicePrice:0,
+                discount:1
+            }
         }
     },
     props:{
@@ -63,13 +78,17 @@
                 let reg = new RegExp(text)
                 return reg.test(value.JuiceName)
             })
+        },
+        besure(count){
+            //在这把id和数量发给浮窗组件
         }
     },
     components:{
         TopBar,
         MenuBar,
         JuiceBlock,
-        SearchBlock
+        SearchBlock,
+        DialogBlock
     },
     created(){
         request.get("/public/juice-list.json").then(result=>{
