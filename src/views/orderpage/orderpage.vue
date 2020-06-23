@@ -25,11 +25,17 @@
             <div class="dialog-container"  v-show="dialogFormVisible">
                 <dialog-block  @besure="besure" @dialogoff="dialogoff"></dialog-block>
             </div>
-            <div v-show="SummaryBlockVisible">
+            <div v-show="SummaryBlockVisible" class="summaryblock-bigcontainer">
                 <summary-block @block-off="summaryoff"></summary-block>
             </div>
-            <div @click="SummaryBlockVisible = true">
+            <div @click="floatbeclicked">
                 <float-promp></float-promp>
+            </div>
+            <div class="leftarrowlink-container" v-show="LeftArrowLinkVisible" @click="showallorders">
+                <left-arrow-link what-text="  All Historical Orders"></left-arrow-link>
+            </div>
+            <div class="show-all-orders-container" v-if="ShowAllOrdersVisible">
+                <show-all-orders @close="showallclose"></show-all-orders>
             </div>
         </aside>
   </div>
@@ -46,6 +52,8 @@
   import DialogBlock from 'components/common/dialog/dialog'
   import SummaryBlock from 'components/common/summaryblock/summaryblock'
   import FloatPromp from 'components/common/floatpromp/floatpromp'
+  import LeftArrowLink from 'components/common/arrowlink/leftarrowlink'
+  import ShowAllOrders from 'components/common/showallorders/showallorders'
 
   export default {
     name:'OrderPage',
@@ -56,7 +64,9 @@
             menulist:[],
             dialogFormVisible:false,
             currentJuice:{},
-            SummaryBlockVisible:false
+            SummaryBlockVisible:false,
+            LeftArrowLinkVisible:false,
+            ShowAllOrdersVisible:false
         }
     },
     props:{
@@ -90,8 +100,28 @@
             this.$store.commit('chooseJuice',item)
             this.dialogFormVisible = true
         },
+        floatbeclicked(){
+            this.SummaryBlockVisible = true
+            this.LeftArrowLinkVisible = true
+        },
         summaryoff(){
             this.SummaryBlockVisible = false
+            this.LeftArrowLinkVisible = false
+        },
+        showallorders(){
+            new Promise((resolve,rejected)=>{
+                
+                $('.summaryblock-bigcontainer,.leftarrowlink-container').fadeOut(800,()=>{
+                    resolve('')
+                })
+            }).then(data=>{
+                this.LeftArrowLinkVisible = false
+                this.SummaryBlockVisible = false
+                this.ShowAllOrdersVisible = true
+            })
+        },
+        showallclose(){
+            this.ShowAllOrdersVisible = false
         }
     },
     components:{
@@ -101,7 +131,9 @@
         SearchBlock,
         DialogBlock,
         SummaryBlock,
-        FloatPromp
+        FloatPromp,
+        LeftArrowLink,
+        ShowAllOrders
     },
     created(){
         request.get("/public/juice-list.json").then(result=>{
@@ -169,6 +201,15 @@
       height:30vh;
       width:15vw;
       display: none;
+  }
+
+  .leftarrowlink-container{
+      position: absolute;
+      top:40vh;
+      left:2vw;
+      width:20vw;
+      height:20vh;
+      z-index: 153;
   }
   
 </style>
