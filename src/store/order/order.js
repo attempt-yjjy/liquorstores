@@ -1,7 +1,7 @@
 let request = require('js/request/request.js')
 export default{
     state:{
-        imgbaseUrl:'http://www.yjxyjx.club/public/imgbase/',
+        imgbaseUrl:'http://www.yjxyjx.club:8011/public/imgbase/',
         currentOrder:[
             
         ],
@@ -57,7 +57,7 @@ export default{
         },
         removeAll(state){
             state.currentOrder = [],
-            state.currentOrderId = -1,
+            state.currentOrderId = 100,
             state.currentJuice = {}
         }
     },
@@ -72,14 +72,24 @@ export default{
         },
         getOrderId(state){
             let temp = state.currentOrderId
-            state.currentOrderId++
+            state.currentOrderId = temp + 1
             return temp
         }
     },
     actions:{
         submitOrder(context){
-            request.post('/order/submit',context.state.currentOrder).then(result=>{
-                context.commit('removeAll')
+            let orderId = context.getters.getOrderId
+            let postdata = {
+                data:context.state.currentOrder,
+            }
+            console.log(postdata)
+            request.post('/order/submit',postdata).then(result=>{
+                let data = result.data
+                if(data.success){
+                    console.log("订单提交成功")
+                    context.commit('removeAll')
+                }
+                
             })
         }
     }
