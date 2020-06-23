@@ -9,10 +9,13 @@
 <script>
 
 import GlobalBg from './components/global/globalbg'
-
+import request from 'js/request/request.js'
 export default {
   components:{
     GlobalBg
+  },
+  methods:{
+    
   }
 }
 </script>
