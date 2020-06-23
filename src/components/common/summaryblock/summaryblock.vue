@@ -75,7 +75,7 @@
         this.$store.commit('removeJuice',this.currentId)
       },
       submitorder(){
-
+        this.$store.dispatch('submitOrder')
       },
       removealloforder(){
         this.$store.commit('removeAll')

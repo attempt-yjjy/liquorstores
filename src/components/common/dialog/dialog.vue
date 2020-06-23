@@ -113,7 +113,8 @@ export default {
     }
 
     .dialog-containerimg .img-container img{
-        width:80%;
+        width:70%;
+        height:80%;
     }
 
     .dialog-txt{

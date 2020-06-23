@@ -1,51 +1,9 @@
+let request = require('js/request/request.js')
 export default{
     state:{
         imgbaseUrl:'http://www.yjxyjx.club/public/imgbase/',
         currentOrder:[
-            {
-                "JuiceId":60,
-                "JuiceName":"原味奶茶",
-                "JuiceSrc":"https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1981475166,4029771665&fm=26&gp=0.jpg",
-                "TodaySales":"24",
-                "discount":0.89,
-                "JuicePrice":25,
-                "BelongTo":"奶茶",
-                "imgClass":"nc",
-                "count":4
-            },
-            {
-                "JuiceId":61,
-                "JuiceName":"焦糖奶茶",
-                "JuiceSrc":"https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1981475166,4029771665&fm=26&gp=0.jpg",
-                "TodaySales":"24",
-                "discount":0.23,
-                "JuicePrice":20,
-                "BelongTo":"奶茶",
-                "imgClass":"nc",
-                "count":1
-            },
-            {
-                "JuiceId":62,
-                "JuiceName":"红糖奶茶",
-                "JuiceSrc":"https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1981475166,4029771665&fm=26&gp=0.jpg",
-                "TodaySales":"80",
-                "discount":0.29,
-                "JuicePrice":25,
-                "BelongTo":"奶茶",
-                "imgClass":"nc",
-                "count":2
-            },
-            {
-                "JuiceId":63,
-                "JuiceName":"美式咖啡",
-                "JuiceSrc":"https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1981475166,4029771665&fm=26&gp=0.jpg",
-                "TodaySales":"24",
-                "discount":0.5,
-                "JuicePrice":35,
-                "BelongTo":"咖啡",
-                "imgClass":"cf",
-                "count":2
-            }
+            
         ],
         currentOrderId:-1,
         currentJuice:{
@@ -67,17 +25,17 @@ export default{
             tempobject.count = count
             state.currentJuice = tempobject
         },
-        addJuice(state,juice){
-            let id = juice.JuiceId
+        addJuice(state){
+            let id = state.currentJuice.JuiceId
             let exists = false
             state.currentOrder.forEach(item=>{
                 if(item.JuiceId == id){
-                    item.count += juice.count
+                    item.count += state.currentJuice.count
                     exists = true
                 }
             })
             if(!exists){
-                state.currentOrder.push(juice)
+                state.currentOrder.push(state.currentJuice)
             }
         },
         removeJuice(state,id){
@@ -118,7 +76,11 @@ export default{
             return temp
         }
     },
-    action:{
-
+    actions:{
+        submitOrder(context){
+            request.post('/order/submit',context.state.currentOrder).then(result=>{
+                context.commit('removeAll')
+            })
+        }
     }
 }

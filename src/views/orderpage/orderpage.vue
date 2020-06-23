@@ -80,8 +80,8 @@
             })
         },
         besure(count){
-            //在这把id和数量发给浮窗组件
             this.dialogFormVisible = false
+            this.$store.commit('addJuice')
         },
         dialogoff(){
             this.dialogFormVisible = false

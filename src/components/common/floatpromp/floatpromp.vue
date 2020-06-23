@@ -1,8 +1,8 @@
 <template>
   <div class='floatpromp-container'>
       <img src="~assets/img/other/floatside.png"/>
-    <div class="count-container">
-        <span>{{currentJuiceCount}}</span>
+    <div class="count-span-div">
+        <span>{{$store.state.order.currentOrder.length}}</span>
     </div>
   </div>
 </template>
@@ -49,7 +49,7 @@
       height:100%;
   }
 
-  .floatpromp-container .count-container{
+  .floatpromp-container .count-span-div{
       width:3vh;
       height:3vh;
       background-color: rgb(222,77,101);
