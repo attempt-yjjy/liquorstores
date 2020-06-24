@@ -2,6 +2,7 @@ let request = require('js/request/request.js')
 export default{
     state:{
         imgbaseUrl:'http://www.yjxyjx.club:8011/public/imgbase/',
+        iconbaseUrl:'http://www.yjxyjx.club:8011/public/iconbase/',
         currentOrder:[
             
         ],
@@ -30,7 +31,7 @@ export default{
             let exists = false
             state.currentOrder.forEach(item=>{
                 if(item.JuiceId == id){
-                    item.count += state.currentJuice.count
+                    item.count += state.currentJuice.count * 1
                     exists = true
                 }
             })
@@ -77,7 +78,7 @@ export default{
         }
     },
     actions:{
-        submitOrder(context){
+        submitOrder(context,callback){
             let orderId = context.getters.getOrderId
             let postdata = {
                 data:context.state.currentOrder,
@@ -91,6 +92,7 @@ export default{
                 }
                 
             })
+            callback()
         }
     }
 }

@@ -3,6 +3,7 @@
       <div class="summaryblock-mask" @click="maskClicked"></div>
       <div class="summaryblock-body" :style="{'width':BlockWidth,'height':BlockHeight}">
           <div class="summaryblock-juicelist-show">
+            <empty-show v-show="$store.state.order.currentOrder.length == 0" img-width="20%" font-size="20px"></empty-show>
             <div :class="{'summaryblock-juicelist-item':true,'item-bechosed':currentId == item.JuiceId}" v-for="item in $store.state.order.currentOrder" :key="item.JuiceId" @click="currentId = item.JuiceId">
               <div class="img-container">
                 <img :src="$store.state.order.imgbaseUrl + (item.JuiceId % 30 + 1) + '.jpg'"/>
@@ -40,6 +41,8 @@
   </div>
 </template>
 <script>
+  import EmptyShow from 'components/common/emptyshow/emptyshow'
+
   export default {
     name:'SummaryBlock',
     props:{
@@ -59,6 +62,9 @@
         currentId:-1
       }
     },
+    components:{
+      EmptyShow
+    },
     filters:{
       itemPrice(value){
         return value.toFixed(2)
@@ -75,7 +81,20 @@
         this.$store.commit('removeJuice',this.currentId)
       },
       submitorder(){
-        this.$store.dispatch('submitOrder')
+        if(this.$store.state.order.currentOrder.length == 0){
+          console.log("等于0")
+          return
+        }
+        this.$store.commit('startloading')
+        this.$store.dispatch('submitOrder',()=>{
+          setTimeout(()=>{
+                this.$store.commit('iconhidden')
+                this.$store.commit('loadingsuccess')
+                setTimeout(()=>{
+                    this.$store.commit('iconhidden')
+                },800)
+            },500)
+        })
       },
       removealloforder(){
         this.$store.commit('removeAll')

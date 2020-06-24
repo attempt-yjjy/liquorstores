@@ -16,6 +16,7 @@
                 </div>
               </div>
               <div class="items-container">
+                  <empty-show v-show="processinglist.length == 0" img-width="20%" font-size="20px"></empty-show>
                   <div class="item" v-for="item in processinglist" :key="item.OrderId">
                       <div class="item-orderid item-room">{{item.OrderId}}</div>
                       <div class="item-totalPrice item-room">￥{{item.OrderPrice}}</div>
@@ -40,6 +41,7 @@
                 </div>
               </div>
               <div class="items-container">
+                  <empty-show v-show="finishedlist.length == 0" img-width="20%" font-size="20px"></empty-show>
                   <div class="item" v-for="item in finishedlist" :key="item.OrderId">
                       <div class="item-orderid item-room">{{item.OrderId}}</div>
                       <div class="item-totalPrice item-room">￥{{item.OrderPrice}}</div>
@@ -56,6 +58,7 @@
 <script>
   import request from 'js/request/request.js'
   import {$} from 'js/jquery/jq.js'
+  import EmptyShow from 'components/common/emptyshow/emptyshow'
 
   export default {
     name:'ShowAllOrders',
@@ -71,6 +74,9 @@
                
             ]
         }
+    },
+    components:{
+        EmptyShow
     },
     created(){
         request.get('/order/getall').then(result=>{
@@ -107,6 +113,9 @@
                 }
             })
 
+            setTimeout(()=>{
+                this.$store.commit('iconhidden')
+            },1000)
             
         })
     },

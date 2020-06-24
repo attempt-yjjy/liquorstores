@@ -7,7 +7,8 @@
             <div class="menu-container">
               <menu-bar :showlist="menulist" @contenttoggle="changecontent"></menu-bar>
             </div>
-            <div class="list-container">               
+            <div class="list-container">
+                <empty-show v-show="juiceListToShow.length == 0" img-width="12%" font-size="25px"></empty-show>               
                 <div class="list-item"  v-for="item in juiceListToShow" :key="item.JuiceId" @click="chooseJuice(item)"> 
                     <juice-block    :juice-id="item.JuiceId"
                                     :juice-name="item.JuiceName" 
@@ -37,6 +38,7 @@
             <div class="show-all-orders-container" v-if="ShowAllOrdersVisible">
                 <show-all-orders @close="showallclose"></show-all-orders>
             </div>
+            
         </aside>
   </div>
 </template>
@@ -54,6 +56,7 @@
   import FloatPromp from 'components/common/floatpromp/floatpromp'
   import LeftArrowLink from 'components/common/arrowlink/leftarrowlink'
   import ShowAllOrders from 'components/common/showallorders/showallorders'
+  import EmptyShow from 'components/common/emptyshow/emptyshow'
 
   export default {
     name:'OrderPage',
@@ -66,7 +69,8 @@
             currentJuice:{},
             SummaryBlockVisible:false,
             LeftArrowLinkVisible:false,
-            ShowAllOrdersVisible:false
+            ShowAllOrdersVisible:false,
+            
         }
     },
     props:{
@@ -79,6 +83,9 @@
                 return value.BelongTo == text
                  
             })
+            setTimeout(()=>{
+                this.$store.commit('iconhidden')
+            },500)
         },
         togglesearch(){
             $('.searchblock-container').slideToggle(300)
@@ -88,6 +95,13 @@
                 let reg = new RegExp(text)
                 return reg.test(value.JuiceName)
             })
+            setTimeout(()=>{
+                this.$store.commit('iconhidden')
+                this.$store.commit('loadingsuccess')
+                setTimeout(()=>{
+                    this.$store.commit('iconhidden')
+                },800)
+            },500)
         },
         besure(count){
             this.dialogFormVisible = false
@@ -109,6 +123,7 @@
             this.LeftArrowLinkVisible = false
         },
         showallorders(){
+            this.$store.commit('startloading')
             new Promise((resolve,rejected)=>{
                 
                 $('.summaryblock-bigcontainer,.leftarrowlink-container').fadeOut(800,()=>{
@@ -133,7 +148,8 @@
         SummaryBlock,
         FloatPromp,
         LeftArrowLink,
-        ShowAllOrders
+        ShowAllOrders,
+        EmptyShow
     },
     created(){
         request.get("/public/juice-list.json").then(result=>{

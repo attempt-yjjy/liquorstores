@@ -65,6 +65,7 @@
         },
         level2_router_jump(text){
             this.$emit("contenttoggle",text)
+            this.$store.commit('startloading')
         }
     }
   }

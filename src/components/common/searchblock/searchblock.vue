@@ -27,12 +27,17 @@
     },
     methods:{
         searchbeclicked(){
+            if(this.inputValue.trim() == ''){
+                return
+            }
             this.$emit('startsearch',this.inputValue)
             this.inputValue = ''
+            this.$store.commit('startloading')
         },
         resetbeclicked(){
             this.inputValue = '',
             this.$emit('startsearch',this.inputValue)
+            this.$store.commit('startloading')
         }
     }
   }

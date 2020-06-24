@@ -3,20 +3,30 @@
     
     <global-bg></global-bg>
     <router-view></router-view>
- 
+    <div class="universalicon-container" v-show="$store.state.global.StatusVisible">
+        <universal-icon :what-happened="$store.state.global.WhatHappened" :if-rotate="$store.state.global.IfRotate" :cus-text="$store.state.global.StatusCusText"></universal-icon>
+    </div>
   </div>
 </template>
 <script>
 
 import GlobalBg from './components/global/globalbg'
 import request from 'js/request/request.js'
+import UniversalIcon from 'components/common/universalicon/universalicon'
 export default {
   components:{
-    GlobalBg
+    GlobalBg,
+    UniversalIcon
   },
   methods:{
     
-  }
+  },
+  data(){
+    return{
+      
+    }
+  },
+
 }
 </script>
 <style>
@@ -38,6 +48,15 @@ export default {
     width: 100vw;
     height:100vh;
     overflow-x: hidden;
+  }
+
+  .universalicon-container{
+      position: absolute;
+      width:4vw;
+      height:10vh;
+      top:40vh;
+      left:48vw;
+      z-index: 160;
   }
 
 </style>
