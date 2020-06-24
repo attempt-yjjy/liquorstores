@@ -13,7 +13,7 @@
                 
                 <div class="count-container">
                     <div class="dialog-item">数量</div>
-                    <div class="dialog-input">{{$store.state.order.currentJuice.count}}</div>
+                    <input class="dialog-input" type="number" v-model="$store.state.order.currentJuice.count">
                 </div>
             </div>
             <div class='dialog-containerimg'>
@@ -89,6 +89,10 @@ export default {
         word-break: break-all;
         width: 50%;
         float: left;
+        display: flex;
+        flex-direction: column;
+        justify-content:center;
+
     }
     .dialog-containerimg{
         padding: 30px 20px;
