@@ -42,6 +42,7 @@
 </template>
 <script>
   import EmptyShow from 'components/common/emptyshow/emptyshow'
+  import {$} from 'js/jquery/jq.js'
 
   export default {
     name:'SummaryBlock',
@@ -99,6 +100,13 @@
       removealloforder(){
         this.$store.commit('removeAll')
       }
+    },
+    mounted(){
+      setTimeout(()=>{
+      $('.summaryblock-summarymessage-show .totalprice').css({
+        fontSize:screen.availHeight * 0.02 + 'px'
+      })
+      },100)
     }
   }
 </script>
@@ -219,7 +227,7 @@
 
   .message-price-and-count .button{
     width:25px;
-    height:25px;
+    height:100%;
     display: flex;
     flex-direction: row;
     justify-content: center;

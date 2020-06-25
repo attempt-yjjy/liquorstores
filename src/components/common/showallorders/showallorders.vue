@@ -174,7 +174,7 @@
       height:10vh;
       text-align: center;
       line-height: 10vh;
-      font-size: 25px;
+      font-size: 25px !important;
       color: white;
       font-weight: 800;
       text-shadow: 1px 1px black;

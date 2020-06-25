@@ -204,9 +204,9 @@
   }
 
   .list-item{
-      width:250px;
-      height:350px;
-      margin:20px;
+      width:13vw;
+      height:40vh;
+      margin:1vw;
       
   }
 

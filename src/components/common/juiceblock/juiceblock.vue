@@ -122,7 +122,6 @@
 /*以下为饮品介绍部分样式*/
 
 .juice-name-container{
-    font-size: large;
     font-weight: 700;
     color: rgba(37, 47, 194, 0.6);
 }

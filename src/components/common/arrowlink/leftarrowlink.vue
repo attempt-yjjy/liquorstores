@@ -58,8 +58,7 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
-    font-size: 20px;     
+    align-items: center; 
   }
 
   @keyframes arrowappear{

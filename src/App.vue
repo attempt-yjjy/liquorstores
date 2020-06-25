@@ -13,6 +13,8 @@
 import GlobalBg from './components/global/globalbg'
 import request from 'js/request/request.js'
 import UniversalIcon from 'components/common/universalicon/universalicon'
+import {$} from 'js/jquery/jq.js'
+
 export default {
   components:{
     GlobalBg,
@@ -26,7 +28,11 @@ export default {
       
     }
   },
-
+  mounted(){
+    $('*').css({
+      fontSize:screen.availHeight * 0.015 + 'px'
+    })
+  }
 }
 </script>
 <style>

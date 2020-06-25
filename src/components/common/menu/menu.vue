@@ -67,6 +67,26 @@
             this.$emit("contenttoggle",text)
             this.$store.commit('startloading')
         }
+    },
+    mounted(){
+        setTimeout(()=>{
+            let height = screen.availHeight*0.07 + 'px'
+            console.log(height)
+            $('.menu-level1-item,.menu-level2-item').css({
+                height:height,
+                lineHeight:height
+            });
+
+            let widthlog = screen.availHeight*0.04 + 'px'
+            $('.menu-level1-item-logo-container,.menu-level1-item-logo-container img').css({
+                width:widthlog
+            })
+
+            let widtharrow = screen.availHeight*0.02 + 'px'
+            $('.menu-level1-item-arrows-container,.menu-level1-item-arrows-container img').css({
+                width:widtharrow
+            })
+        },100)
     }
   }
 </script>
@@ -90,11 +110,12 @@
       width:100%;
       display: flex;
       flex-direction:row;
-      height:50px;
       background-color: rgb(250,195,194);
       color:white;
       font-weight: 400;
       text-shadow: 1px 1px 5px black;
+      height: 50px;
+      line-height: 50px;
   }
 
   .menu-level1-item-logo-container{
@@ -105,12 +126,11 @@
 
   .menu-level1-item-logo-container img{
       width:30px;
+      display: block;
   }
 
   .menu-level1-item-text-container{
       flex:1;
-      height:50px;
-      line-height: 50px;
       text-align: left;
   }
 
@@ -121,6 +141,7 @@
 
   .menu-level1-item-arrows-container img{
       width:20px;
+      display: block;
   }
 
   .menu-level2-container{
@@ -130,14 +151,14 @@
 
   .menu-level2-item{
       width:100%;
-      height:50px;
       background-color: rgb(201,229,222);
       text-align: center;
-      line-height: 50px;
       border-bottom: 1px solid white;
       color:white;
       font-weight: 500;
       text-shadow: 1px 1px 5px black;
+      height: 50px;
+      line-height: 50px;
   }
 
   .menu-level2-item:hover{

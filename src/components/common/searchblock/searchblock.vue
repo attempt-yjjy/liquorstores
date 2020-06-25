@@ -57,7 +57,6 @@
       width:61.8%;
       height:15%;
       padding-left: 5px;
-      font-size: 15px;
       background-color: transparent;
       border: none;
       border-bottom: 1px solid rgb(54, 222, 228);

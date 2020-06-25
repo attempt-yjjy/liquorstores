@@ -2,15 +2,18 @@
     <div class="dialog-bg" :visible.sync="dialogFormVisible">
         <div class="dialog-wbg" >
             <div class="dialog-container">
-                <div class="dialog-txt">商品名称</div>
-                <div class="dialog-frame" >{{$store.state.order.currentJuice.JuiceName}}</div>
-                
-                <div class="dialog-txt">折扣</div>
-                <div class="dialog-frame">{{$store.state.order.currentJuice.discount}}</div>
-                
-                <div class="dialog-txt" >原价</div>
-                <div class="dialog-frame">{{$store.state.order.currentJuice.JuicePrice}}</div>
-                
+                <div>
+                    <div class="dialog-txt">商品名称</div>
+                    <div class="dialog-frame" >{{$store.state.order.currentJuice.JuiceName}}</div>
+                </div>
+                <div>
+                    <div class="dialog-txt">折扣</div>
+                    <div class="dialog-frame">{{$store.state.order.currentJuice.discount}}</div>
+                </div>
+                <div>
+                    <div class="dialog-txt" >原价</div>
+                    <div class="dialog-frame">{{$store.state.order.currentJuice.JuicePrice}}</div>
+                </div>
                 <div class="count-container">
                     <div class="dialog-item">数量</div>
                     <input class="dialog-input" type="number" v-model="$store.state.order.currentJuice.count">
@@ -31,6 +34,8 @@
 </template>
 
 <script>
+import {$} from 'js/jquery/jq.js'
+
 export default {
     data() {
       return {
@@ -57,6 +62,9 @@ export default {
         besure(){
             this.$emit('besure',this.count)
         }
+    },
+    mounted(){
+        
     }
 }
 </script>
@@ -85,28 +93,26 @@ export default {
         border-radius: 2px;
     }
     .dialog-container{
-        padding: 30px 20px;
+        padding-left: 20px;
         color: #606266;
-        font-size: 14px;
         word-break: break-all;
         width: 50%;
         float: left;
         display: flex;
         flex-direction: column;
-        justify-content:center;
+        justify-content:space-around;
 
     }
     .dialog-containerimg{
-        padding: 30px 20px;
+        padding: 10px 20px 30px 20px;
         color: #606266;
-        font-size: 14px;
         word-break: break-all;
         width: 50%;
         float: left;
         display:flex;
         flex-direction: column;
         align-items: center;
-        justify-content: space-around;
+        justify-content: space-between;
     }
 
     .dialog-containerimg .img-container{
@@ -127,11 +133,10 @@ export default {
         text-align: left;
         vertical-align: middle;
         float: left;
-        font-size: 14px;
         color: #606266;
-        line-height: 40px;
         padding: 0 12px 0 0;
         box-sizing: border-box;
+        line-height: 28px;
     }
     .dialog-frame{
         -webkit-appearance: none;
@@ -142,7 +147,6 @@ export default {
         box-sizing: border-box;
         color: #606266;
         display: inline-block;
-        font-size: inherit;
         height: 40px;
         line-height: 40px;
         outline: none;
@@ -171,16 +175,15 @@ export default {
         -webkit-user-select: none;
         -ms-user-select: none;
         padding: 12px 20px;
-        font-size: 14px;
         border-radius: 4px;
-        
+        width:60%;
     }
     .dialog-button-focus{
         font-family: inherit;
-        font-size: inherit;
         line-height: inherit;
         color: inherit;
         float: left;
+        margin-top: 30px;
     }
 
     
@@ -192,17 +195,16 @@ export default {
     } 
 
     .count-container{
-        height:40px;
+        height:10%;
         display: flex;
         flex-direction: row;
         align-items: center;
-        margin-top: 30px;
+        margin-top:10px;
     }
 
     .dialog-item{
         padding: 10px 10px;
         color: #606266;
-        font-size: 14px;
         word-break: break-all;
         flex:1;
     }
@@ -216,7 +218,6 @@ export default {
         box-sizing: border-box;
         color: #606266;
         display: inline-block;
-        font-size: inherit;
         height: 40px;
         line-height: 40px;
         outline: none;
