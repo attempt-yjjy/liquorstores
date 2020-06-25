@@ -18,7 +18,7 @@
             </div>
             <div class='dialog-containerimg'>
                 <div class="img-container">
-                    <img :src="$store.state.order.imgbaseUrl + ($store.state.order.currentJuice.JuiceId % 30 + 1) + '.jpg'"/>
+                    <img :src="$store.state.order.imgbaseUrl + ($store.state.order.currentJuice.JuiceId % 5 + 1) + '.jpg'"/>
                 </div>
                 <!-- <div class="dialog-footer"> -->
                 <div class="dialog-button-focus"  @click="dialogoff">取 消</div>

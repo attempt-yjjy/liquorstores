@@ -6,7 +6,7 @@
             <empty-show v-show="$store.state.order.currentOrder.length == 0" img-width="20%" font-size="20px"></empty-show>
             <div :class="{'summaryblock-juicelist-item':true,'item-bechosed':currentId == item.JuiceId}" v-for="item in $store.state.order.currentOrder" :key="item.JuiceId" @click="currentId = item.JuiceId">
               <div class="img-container">
-                <img :src="$store.state.order.imgbaseUrl + (item.JuiceId % 30 + 1) + '.jpg'"/>
+                <img :src="$store.state.order.imgbaseUrl + (item.JuiceId % 5 + 1) + '.jpg'"/>
               </div>
               <div class="message-container">
                 <div class="message-name">
