@@ -31,7 +31,7 @@ export default{
             let exists = false
             state.currentOrder.forEach(item=>{
                 if(item.JuiceId == id){
-                    item.count += state.currentJuice.count * 1
+                    item.count = item.count*1 +  state.currentJuice.count * 1
                     exists = true
                 }
             })
